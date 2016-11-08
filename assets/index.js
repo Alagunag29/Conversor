@@ -19,7 +19,7 @@ function validacionFormulario() {
 function validarDecimal(valor) {
 	var estado = true;
 	for (var i = 0; i < valor.value.length && estado == true; i++) {
-		if( valor.value[i] < "0" && valor.value[i] >"9" && valor.value[i] != "."){
+		if( !(valor.value[i] >= "0" && valor.value[i] <="9" || valor.value[i] == ".") ){
 			estado = false;
 		}
 	}
@@ -42,7 +42,7 @@ function validarBinario(valor){
 function validarOctal(valor){
 	var estado = true;
 	for (var i = 0; i < valor.value.length && estado == true; i++) {
-		if( valor.value[i] < "0" && valor.value[i] >"7" && valor.value[i] != "."){
+		if( !(valor.value[i] >= "0" && valor.value[i] <="7" || valor.value[i] == ".") ){
 			estado = false;
 		}
 	}
