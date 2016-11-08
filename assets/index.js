@@ -30,7 +30,8 @@ function validarDecimal(valor) {
 function validarBinario(valor){
 	var estado = true;
 	for (var i = 0; i < valor.value.length && estado == true; i++) {
-		if( valor.value[i] < "0" && valor.value[i] >"1" && valor.value[i] != "."){
+		alert(valor.value[i])
+		if( !(valor.value[i] >= "0" && valor.value[i] <="1" || valor.value[i] == ".") ){
 			estado = false;
 		}
 	}
@@ -90,6 +91,9 @@ function validarCampos(){
 function convertir(){
 	var siguientePaso;
 	siguientePaso = validarCampos();
+	if (siguientePaso == true){
+		alert("ok");
+	}
 	
 }
 
