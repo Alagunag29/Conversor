@@ -86,12 +86,20 @@ function validarCampos(){
 	return estado;
 }
 
-//funcion que hace la conversion
+//funcion que hace la conversion; boton convertir
 function convertir(){
 	var siguientePaso;
 	siguientePaso = validarCampos();
 	
 }
+
+//funcion que hace el reset; boton reset
+function resetForm(){
+	document.getElementById("formulario").reset();
+}
+
+
+//
 /*
 	var binario = document.getElementById("binario").value;
 	var num = 123.456789; 
