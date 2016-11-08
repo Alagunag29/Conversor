@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Conversor</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="assets/style.css">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
@@ -14,22 +14,24 @@
 					<p class="container-from-title">Conversor de numeros</p>
 				</div>
 				<div>
-					<input type="number" name="decimal" class="input-form" placeholder="Decimal">
+					<input type="number" name="decimal" class="input-form" placeholder="Decimal" step="any" id="binario">
 				</div>
 				<div>
 					<input type="number" name="binario" class="input-form" placeholder="Binario">
 				</div>
 				<div>
-					<input type="number" name="octal" class="input-form" placeholder="Hexadecimal">
+					<input type="text" name="hexadecimal" class="input-form" placeholder="Hexadecimal">
 				</div>
 				<div>
-					<input type="text" name="hexadecimal" class="input-form" placeholder="Octal">
+					<input type="number" name="octal" class="input-form" placeholder="Octal">
 				</div>
 				<div>
-					<input type="button" value="Convertir" name="" class="input-form-button">
+					<input type="button" value="Convertir" name="" class="input-form-button button-submit" onclick="convertir()"/>
+					<input type="button" value="Reset" name="" class="input-form-button button-reset" id="prueba" />
 				</div>
 			</form>
 		</div>	
 	</div>
+	<script type="text/javascript" src="assets/index.js"></script>
 </body>
 </html>
