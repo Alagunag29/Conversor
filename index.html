@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div class="container-form">
-			<form name="formC" method="post">
+			<form name="formC" method="post" id="formulario">
 				<div>
 					<p class="container-from-title">Conversor de numeros</p>
 				</div>
@@ -26,8 +26,8 @@
 					<input type="number" name="octal" class="input-form" placeholder="Octal">
 				</div>
 				<div>
-					<input type="button" value="Convertir" name="" class="input-form-button button-submit" onclick="convertir()"/>
-					<input type="button" value="Reset" name="" class="input-form-button button-reset" id="prueba" />
+					<input type="button" value="Convertir" class="input-form-button button-submit" onclick="convertir()"/>
+					<input type="button" value="Reset" class="input-form-button button-reset" id="prueba" onclick="resetForm()" />
 				</div>
 			</form>
 		</div>	
