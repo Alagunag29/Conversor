@@ -30,7 +30,6 @@ function validarDecimal(valor) {
 function validarBinario(valor){
 	var estado = true;
 	for (var i = 0; i < valor.value.length && estado == true; i++) {
-		alert(valor.value[i])
 		if( !(valor.value[i] >= "0" && valor.value[i] <="1" || valor.value[i] == ".") ){
 			estado = false;
 		}
