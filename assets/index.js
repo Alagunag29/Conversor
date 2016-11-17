@@ -1,5 +1,35 @@
+/*
+	objeto que tendra de atributo cada sistema de numero. Sus metodos serian para convertir los otros 
+	tres numeros al sistema decimal, para convertirlo con la functiontoString(n) siendo n = 2,8,16 base 
+	correcpondiente de cada sistema 
+*/
 
-var lista = [];
+function Conversor(dec, bin, hex, oct){
+	this.decimal = dec;
+	this.binario = bin;
+	this.hexadecimal = hex;
+	this.octal = oct;
+}
+
+Conversor.prototype.binarioDecimal = function (n) {
+	separador = ".";
+	arreglo = n.split(separador);
+	parteEntera = arreglo[0];
+	parteDecimal = arreglo[1];
+	alert("Numero: " + n + "\n" + "PARTE ENTERA : " + parteEntera + "\n" +"PARTE DECIMAL : " + parteDecimal);  
+}
+
+Conversor.prototype.hexadecimalDecimal = function (){
+
+}
+
+Conversor.prototype.octalDecimal = function (){
+
+}
+
+var numero = new Conversor(0,0,0,0);
+numero.binarioDecimal("111001.011");
+
 
 
 //recorre el formulario, para saber cual de los campo es el que trae dato y lo retorna
