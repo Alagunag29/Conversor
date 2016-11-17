@@ -9,26 +9,69 @@ function Conversor(dec, bin, hex, oct){
 	this.binario = bin;
 	this.hexadecimal = hex;
 	this.octal = oct;
+	this.dividirParteEntera = function (n){
+		separador = ".";
+	    arreglo = n.split(separador);
+	    return arreglo[0];		
+	}
+	this.dividirParteDecimal = function (n){
+		separador = ".";
+	    arreglo = n.split(separador);
+	    return arreglo[1];	
+	}
+	this.tieneParteDecimal = function(n){
+
+		
+	}
+
 }
 
+
 Conversor.prototype.binarioDecimal = function (n) {
-	separador = ".";
-	arreglo = n.split(separador);
-	parteEntera = arreglo[0];
-	parteDecimal = arreglo[1];
-	alert("Numero: " + n + "\n" + "PARTE ENTERA : " + parteEntera + "\n" +"PARTE DECIMAL : " + parteDecimal);  
+
+	if( n.lastIndexOf(".") == -1 ){ // entonces no tien (.) en entero el numero
+		entera = n;
+		decimal = null;
+	}else{
+		var entera = this.dividirParteEntera(n);
+		var decimal = this.dividirParteDecimal(n);
+	    var tamD = decimal.length;
+	    var sw = 0;
+	}
+
+	var tamE = j = entera.length, sumE = 0, sumD = 0;
+	j-=1;
+	for (var i = 0; i < tamE; i++) {
+	   	if(entera[i] == "1"){
+	   		sumE = sumE + Math.pow(2,j);
+	   	}
+	   	j--;
+	}
+	j = -1;
+    for (var i = 0; i < tamD && decimal != null; i++) {
+    	if(decimal[i] == "1"){
+    		sumD = sumD + Math.pow(2,j);
+    	}
+    	j--;
+    }
+    alert("Entera: " + sumE + "\n Decimal: " + sumD);
 }
 
 Conversor.prototype.hexadecimalDecimal = function (){
+   	var entera = this.dividirParteEntera(n);
+	var decimal = this.dividirParteDecimal(n);
 
 }
 
 Conversor.prototype.octalDecimal = function (){
+	var entera = this.dividirParteEntera(n);
+	var decimal = this.dividirParteDecimal(n);
+
 
 }
 
 var numero = new Conversor(0,0,0,0);
-numero.binarioDecimal("111001.011");
+numero.binarioDecimal("10110.01101");
 
 
 
