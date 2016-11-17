@@ -36,9 +36,8 @@ Conversor.prototype.binarioDecimal = function (n) {
 		var entera = this.dividirParteEntera(n);
 		var decimal = this.dividirParteDecimal(n);
 	    var tamD = decimal.length;
-	    var sw = 0;
 	}
-
+    
 	var tamE = j = entera.length, sumE = 0, sumD = 0;
 	j-=1;
 	for (var i = 0; i < tamE; i++) {
@@ -48,19 +47,52 @@ Conversor.prototype.binarioDecimal = function (n) {
 	   	j--;
 	}
 	j = -1;
+	/*parte decimal*/
     for (var i = 0; i < tamD && decimal != null; i++) {
     	if(decimal[i] == "1"){
     		sumD = sumD + Math.pow(2,j);
     	}
     	j--;
     }
-    alert("Entera: " + sumE + "\n Decimal: " + sumD);
+  //  alert("Entera: " + sumE + "\n Decimal: " + sumD);
 }
 
-Conversor.prototype.hexadecimalDecimal = function (){
-   	var entera = this.dividirParteEntera(n);
-	var decimal = this.dividirParteDecimal(n);
+Conversor.prototype.hexadecimalDecimal = function (n){
+   	if( n.lastIndexOf(".") == -1 ){ // entonces no tien (.) en entero el numero
+		entera = n;
+		decimal = null;
+	}else{
+		var entera = this.dividirParteEntera(n);
+		var decimal = this.dividirParteDecimal(n);
+	    var tamD = decimal.length;
+	}
+    
+   	var tamE = j = entera.length, sumE = 0, sumD = 0, num = 0;
+	j-=1;
+	for (var i = 0; i < tamE; i++) {
+		if(entera[i]>= "A" && entera[i] <="F"){
+			num = convertirLetraNumero(entera[i]);
+		}else{
+			num = parseInt(entera[i]);
+		}
+            
+	   	sumE = sumE + ( num * Math.pow(16,j) );
+	   	j--;
+		
+	}
 
+    for (var i = 0; i < tamD && decimal != null; i++) {
+		if(decimal[i]>= "A" && decimal[i] <="F"){
+			num = convertirLetraNumero(decimal[i]);
+		}else{
+			num = parseInt(decimal[i]);
+		}
+        
+	   	sumD = sumD + ( num * Math.pow(16,j) );
+	   	j--;
+    }
+  //  alert("entera: " + sumE + "\ndecimal: " + sumD);
+    
 }
 
 Conversor.prototype.octalDecimal = function (){
@@ -70,13 +102,29 @@ Conversor.prototype.octalDecimal = function (){
 
 }
 
+function convertirLetraNumero (valor){
+	if(valor == "A"){
+		return 10;
+	}else if(valor == "B"){
+		return 11;
+	}else if(valor == "C"){
+		return 12;
+	}else if(valor == "D"){
+		return 13;
+	}else if(valor == "E"){
+		return 14;
+	}else if(valor == "F"){
+		return 15;
+	}
+}
+
 var numero = new Conversor(0,0,0,0);
 numero.binarioDecimal("10110.01101");
-
+numero.hexadecimalDecimal("2A4.B6");
 
 
 //recorre el formulario, para saber cual de los campo es el que trae dato y lo retorna
-function validacionFormulario() {
+function validacionFormulario () {
 	input = null;
 	if(document.forms.length > 0) {
 		for (var i = 0; i < (document.forms[0].length - 2) && input == null; i++) {
@@ -89,7 +137,7 @@ function validacionFormulario() {
 	return input;
 }
 
-function validarDecimal(valor) {
+function validarDecimal (valor) {
 	var estado = true;
 	for (var i = 0; i < valor.value.length && estado == true; i++) {
 		if( !(valor.value[i] >= "0" && valor.value[i] <="9" || valor.value[i] == ".") ){
@@ -100,7 +148,7 @@ function validarDecimal(valor) {
 }
 
 //validando que el numero sea binario solo este entre cero(0) y uno(1)
-function validarBinario(valor){
+function validarBinario (valor){
 	var estado = true;
 	for (var i = 0; i < valor.value.length && estado == true; i++) {
 		if( !(valor.value[i] >= "0" && valor.value[i] <="1" || valor.value[i] == ".") ){
@@ -111,7 +159,7 @@ function validarBinario(valor){
 }
 
 //validando que el numero sea octal
-function validarOctal(valor){
+function validarOctal (valor){
 	var estado = true;
 	for (var i = 0; i < valor.value.length && estado == true; i++) {
 		if( !(valor.value[i] >= "0" && valor.value[i] <="7" || valor.value[i] == ".") ){
@@ -122,7 +170,7 @@ function validarOctal(valor){
 }
 
 //validando que el numero sea hexadicimal correctamento convirtiendo la cadena en mayudacalas 
-function validarHexadecimal(valor){
+function validarHexadecimal (valor){
 	var estado = true, texto = valor.value.toUpperCase();
 	for (var i = 0; i < texto.length && estado == true; i++) {
 		if( !(texto[i] >= "0" && texto[i] <= "9") && !(texto[i] >="A" && texto[i] <= "F" && texto[i] != ".") ){
@@ -136,7 +184,7 @@ function validarHexadecimal(valor){
 	retornara true o falso, si es true ya el numero sera valido para convertirde un tipo a otro
 	de ser false pasara lo contrario
  */
-function validarCampos(){
+function validarCampos (){
 	var valorInput = validacionFormulario();
 	var estado = false;
 	if( valorInput == null ){
@@ -160,7 +208,7 @@ function validarCampos(){
 }
 
 //funcion que hace la conversion; boton convertir
-function convertir(){
+function convertir (){
 	var siguientePaso;
 	siguientePaso = validarCampos();
 	if (siguientePaso == true){
@@ -170,7 +218,7 @@ function convertir(){
 }
 
 //funcion que hace el reset; boton reset
-function resetForm(){
+function resetForm (){
 	document.getElementById("formulario").reset();
 }
 
