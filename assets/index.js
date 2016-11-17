@@ -58,16 +58,18 @@ Conversor.prototype.binarioDecimal = function (n) {
 }
 
 Conversor.prototype.hexadecimalDecimal = function (n){
+
+	var tamE = 0, tamD = 0, sumE = 0, sumD = 0, num = 0, numero = 0;
+	var entera = 0, decimal = 0; 	
    	if( n.lastIndexOf(".") == -1 ){ // entonces no tien (.) en entero el numero
 		entera = n;
-		decimal = null;
 	}else{
 		var entera = this.dividirParteEntera(n);
 		var decimal = this.dividirParteDecimal(n);
 	    var tamD = decimal.length;
 	}
     
-   	var tamE = j = entera.length, sumE = 0, sumD = 0, num = 0;
+   	var tamE = j = entera.length;
 	j-=1;
 	for (var i = 0; i < tamE; i++) {
 		if(entera[i]>= "A" && entera[i] <="F"){
@@ -78,10 +80,9 @@ Conversor.prototype.hexadecimalDecimal = function (n){
             
 	   	sumE = sumE + ( num * Math.pow(16,j) );
 	   	j--;
-		
 	}
-
-    for (var i = 0; i < tamD && decimal != null; i++) {
+    
+    for (var i = 0; i < tamD; i++) {
 		if(decimal[i]>= "A" && decimal[i] <="F"){
 			num = convertirLetraNumero(decimal[i]);
 		}else{
@@ -91,7 +92,10 @@ Conversor.prototype.hexadecimalDecimal = function (n){
 	   	sumD = sumD + ( num * Math.pow(16,j) );
 	   	j--;
     }
-  //  alert("entera: " + sumE + "\ndecimal: " + sumD);
+
+    sumE = parseFloat(sumE);
+    sumD = parseFloat(sumD);
+    alert(sumE + sumD);
     
 }
 
