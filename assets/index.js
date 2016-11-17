@@ -95,10 +95,39 @@ Conversor.prototype.hexadecimalDecimal = function (n){
     
 }
 
-Conversor.prototype.octalDecimal = function (){
-	var entera = this.dividirParteEntera(n);
-	var decimal = this.dividirParteDecimal(n);
+Conversor.prototype.octalDecimal = function (n){
+	
+    var tamE = 0, tamD = 0, j, sumE = 0, sumD = 0, num = 0, numero = 0;
+    var entera, decimal;
 
+	if( n.lastIndexOf(".") == -1 ){ // entonces no tien (.) en entero el numero
+		entera = n;
+	}else{
+		entera = this.dividirParteEntera(n);
+		decimal = this.dividirParteDecimal(n);
+	    tamD = decimal.length;
+	}
+    
+   	tamE = j = entera.length, 
+	j-=1;
+
+	for (var i = 0; i < tamE; i++) {
+		num = parseInt(entera[i]);
+	   	sumE = sumE + ( num * Math.pow(8,j) );
+	   	j--;
+	}
+
+    for (var i = 0; i < tamD; i++) {
+		num = parseInt(decimal[i]);    
+	   	sumD = sumD + ( num * Math.pow(8,j) );
+	   	j--;
+    }
+
+    sumE = parseFloat(sumE);
+    sumD = parseFloat(sumD);
+    alert(sumE + sumD);
+
+   // this.decimal = sumE + sumD;
 
 }
 
@@ -121,6 +150,7 @@ function convertirLetraNumero (valor){
 var numero = new Conversor(0,0,0,0);
 numero.binarioDecimal("10110.01101");
 numero.hexadecimalDecimal("2A4.B6");
+numero.octalDecimal("234.56");
 
 
 //recorre el formulario, para saber cual de los campo es el que trae dato y lo retorna
