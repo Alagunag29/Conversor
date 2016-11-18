@@ -19,26 +19,23 @@ function Conversor(dec, bin, hex, oct){
 	    arreglo = n.split(separador);
 	    return arreglo[1];	
 	}
-	this.tieneParteDecimal = function(n){
-
-		
-	}
-
 }
 
 
 Conversor.prototype.binarioDecimal = function (n) {
 
+	var tamE = 0, tamD = 0, sumE = 0, sumD = 0, num = 0, numero = 0;
+	var entera = 0, decimal = 0;
+
 	if( n.lastIndexOf(".") == -1 ){ // entonces no tien (.) en entero el numero
 		entera = n;
-		decimal = null;
 	}else{
 		var entera = this.dividirParteEntera(n);
 		var decimal = this.dividirParteDecimal(n);
 	    var tamD = decimal.length;
 	}
     
-	var tamE = j = entera.length, sumE = 0, sumD = 0;
+	tamE = j = entera.length;
 	j-=1;
 	for (var i = 0; i < tamE; i++) {
 	   	if(entera[i] == "1"){
@@ -48,13 +45,16 @@ Conversor.prototype.binarioDecimal = function (n) {
 	}
 	j = -1;
 	/*parte decimal*/
-    for (var i = 0; i < tamD && decimal != null; i++) {
+    for (var i = 0; i < tamD; i++) {
     	if(decimal[i] == "1"){
     		sumD = sumD + Math.pow(2,j);
     	}
     	j--;
     }
-  //  alert("Entera: " + sumE + "\n Decimal: " + sumD);
+    sumE = parseFloat(sumE);
+    sumD = parseFloat(sumD);
+    this.decimal = sumE+ sumD;
+  
 }
 
 Conversor.prototype.hexadecimalDecimal = function (n){
@@ -95,8 +95,8 @@ Conversor.prototype.hexadecimalDecimal = function (n){
 
     sumE = parseFloat(sumE);
     sumD = parseFloat(sumD);
-    alert(sumE + sumD);
-    
+    this.decimal = sumE + sumD;
+   
 }
 
 Conversor.prototype.octalDecimal = function (n){
@@ -129,9 +129,9 @@ Conversor.prototype.octalDecimal = function (n){
 
     sumE = parseFloat(sumE);
     sumD = parseFloat(sumD);
-    alert(sumE + sumD);
-
-   // this.decimal = sumE + sumD;
+    this.decimal = sumE + sumD;
+    console.log(this.decimal);
+   
 
 }
 
@@ -150,11 +150,6 @@ function convertirLetraNumero (valor){
 		return 15;
 	}
 }
-
-var numero = new Conversor(0,0,0,0);
-numero.binarioDecimal("10110.01101");
-numero.hexadecimalDecimal("2A4.B6");
-numero.octalDecimal("234.56");
 
 
 //recorre el formulario, para saber cual de los campo es el que trae dato y lo retorna
@@ -241,47 +236,37 @@ function validarCampos (){
 	return estado;
 }
 
+
+
+var numero = new Conversor(0,0,0,0);
 //funcion que hace la conversion; boton convertir
 function convertir (){
 	var siguientePaso;
 	siguientePaso = validarCampos();
 	if (siguientePaso == true){
-		alert("ok");
+        var input = validacionFormulario ();
+        if(input.id == "Binario"){
+        	numero.binarioDecimal(input.value);
+        }else if(input.id == "Hexadecimal"){
+            numero.hexadecimalDecimal(input.value)	
+        }else if(input.id == "Octal"){
+        	numero.octalDecimal(input.value);
+        }else{
+        	numero.decimal = input.value;
+        }
+
+        var numeroDecimalFloat = parseFloat(numero.decimal);
+        document.getElementById("Decimal").value = numeroDecimalFloat;
+        document.getElementById("Binario").value = numeroDecimalFloat.toString(2);
+        document.getElementById("Hexadecimal").value = numeroDecimalFloat.toString(16);
+        document.getElementById("Octal").value = numeroDecimalFloat.toString(8);
+
 	}
 	
 }
+
 
 //funcion que hace el reset; boton reset
 function resetForm (){
 	document.getElementById("formulario").reset();
 }
-
-
-//
-/*
-	var binario = document.getElementById("binario").value;
-	var num = 123.456789; 
-	alert("Todos: "+num); 
-	num0 = num.toFixed(0);//sirve  
-	alert("Parte entera: "+num0);
-
-	lista.push("1");
-	lista.push(1);
-	lista.push("wq.");
-	var no = "";
-	for (var i in lista) {
-		no = no.concat(lista[i]);
-	}
-	alert(no);
-
-
-	var z = "1012101";
-	for (var i = 0; i < z.length; i++) {
-		if (z[i] < "0" || z[i] > "1"){
-			alert(z[i]  + " erro");
-		}else{
-			alert(z[i] + " ok ");
-		}
-	}
-*/
-	
