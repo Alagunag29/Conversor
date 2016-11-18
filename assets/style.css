@@ -47,6 +47,7 @@ form {
 	margin-top: 10px; 
 	border: 1px solid #dbdbe2;
 	border-radius: 4px;
+	text-transform:uppercase;
 }
 
 .input-form-button {
